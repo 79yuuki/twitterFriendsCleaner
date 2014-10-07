@@ -23,6 +23,12 @@ p#description {
   text-align: center;
 }
 
+p#aboutme {
+  color: #AAA;
+  text-align: center;
+  font-size: 12px;
+}
+
 div.twitter {
   color: #666;
   background-color: rgba(255,255,255,0.7);
