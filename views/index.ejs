@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter Friends Cleaner</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Twitter Friends Cleaner</h1>
+    <p id="description">This service to help to remove a Twitter friend there is no post more than a month.</p>
+      <% for(var i=0; i<users.length; i++) { %>
+      <div class="twitter" data-conversation="none" lang="ja" id="tweet-<%= users[i].id %>">
+        <p><%= status[i].text %></p>
+        &mdash; <%= users[i].name %> (@<%= users[i].screen_name %>)<br>
+        <a href="https://twitter.com/<%= users[i].screen_name %>/status/<%= status[i].id_str %>">
+          <%= status[i].created_at %>
+        </a>
+        <hr>
+        <button id="<%= users[i].id %>" >Remove</button>
+      </div>
+      <% } %>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    var id = $(this).attr("id");
+    $("#tweet-"+id).hide("slow", function(){ $('#tweet-'+id).remove(); });
+    $.get('/remove/'+id);
+  });
+});
+      </script>
+  </body>
+</html>

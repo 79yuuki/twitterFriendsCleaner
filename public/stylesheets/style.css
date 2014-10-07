@@ -1,0 +1,71 @@
+body {
+  background-color: #ffffff;
+  background-image: url("../images/twitterfriendscleaner.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  padding: 8px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1 {
+  color: #666;
+  text-align: center;
+}
+
+p#description {
+  color: #999;
+  text-align: center;
+}
+
+div.twitter {
+  color: #666;
+  background-color: rgba(255,255,255,0.7);
+  padding: 10px;
+  margin: 15px;
+}
+
+.twitter p {
+  font-size: 24px;
+  word-wrap: break-word;
+}
+
+.twitter button {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 10px 30px;
+  background-color: #00B7FF;
+  color: #fff;
+  border-style: none;
+}
+
+.twitter button:hober {
+  background-color: #00B7DD;
+  color: #fff;
+}
+
+#content {
+  position: relative;
+  top:50%;
+  transform: translateY(50%);
+  width: 100%;
+  text-align: center;
+}
+
+#login {
+  line-height: 55px;
+  text-decoration: none;
+  text-align:center;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 10px 30px;
+  background-color: #00B7FF;
+  color: #fff;
+  border-style: none;
+}
