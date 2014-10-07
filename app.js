@@ -17,7 +17,7 @@ var TWITTER_CONSUMER_KEY = 'eXs2evrNYxcKw9I4jVYzSkSCa';
 var TWITTER_CONSUMER_SECRET = 'H8weDI9Zuuv2dJOaZLfrEovq8zeBaPoS8ADwdKLWpQMJ4TBRZx';
 var CALLBACKURL;
 if (process.env.REDISTOGO_URL) {
-  CALLBACKURL = 'http://danshari.herokuapp.com/auth/twitter/callback';
+  CALLBACKURL = 'http://twitterfriendscleaner.herokuapp.com/auth/twitter/callback';
 } else {
   CALLBACKURL = 'http://localhost:3000/auth/twitter/callback';
 }
