@@ -128,12 +128,15 @@ app.get('/', ensureAuthenticated,
               });
               users.forEach(function(user){
                 if (user.status) {
-                  status.push(user.status);
+                  status.push({text: user.status.text, created_at: user.status.created_at, id: user.status.id, id_str: user.status.id_str});
                 } else {
-                  status.push({text: 'none', created_at: 'none', id: 'none'});
+                  status.push({text: 'none', created_at: 'none', id: 'none', id_str: ''});
                 }
               });
-
+              for (var ite=0; ite<users.length; ite++) {
+                var user = users[ite];
+                users[ite] = {name: user.name, screen_name: user.screen_name, id: user.id};
+              }
               var now = moment();
               for (var i = 0; i < users.length; i++) {
                 var time = status[i].created_at;
