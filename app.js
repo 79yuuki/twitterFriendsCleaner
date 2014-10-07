@@ -173,13 +173,16 @@ app.get('/login', login);
 
 app.get('/remove/:id', ensureAuthenticated, function(req, res){
   var id = parseInt(req.params.id, 10);
+  if (!id) {
+    return res.send(new Error('invalid id'), 400);
+  }
   passport._strategies.twitter._oauth.getProtectedResource(
     'https://api.twitter.com/1.1/friendships/destroy.json?user_id='+id,
     'POST',
     req.user.twitter_token,
     req.user.twitter_token_secret,
     function(err){
-      if (err) {
+      if (err || !req.user) {
         return console.log(err);
       }
       redis.hget(req.user.twitter_token, 'list',function(err,result){
