@@ -13,8 +13,10 @@ var moment = require('moment');
 var RedisStore = require('connect-redis')(session);
 var redis = require('./lib/redis');
 
-var TWITTER_CONSUMER_KEY = 'eXs2evrNYxcKw9I4jVYzSkSCa';
-var TWITTER_CONSUMER_SECRET = 'H8weDI9Zuuv2dJOaZLfrEovq8zeBaPoS8ADwdKLWpQMJ4TBRZx';
+var config = require('./config');
+
+var TWITTER_CONSUMER_KEY = config.twitter.key;
+var TWITTER_CONSUMER_SECRET = config.twitter.secret;
 var CALLBACKURL;
 if (process.env.REDISTOGO_URL) {
   CALLBACKURL = 'http://twitterfriendscleaner.herokuapp.com/auth/twitter/callback';
