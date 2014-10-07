@@ -91,6 +91,9 @@ app.get('/', ensureAuthenticated,
         passport._strategies.twitter._oauth.getProtectedResource('https://api.twitter.com/1.1/friends/ids.json','GET',req.user.twitter_token,req.user.twitter_token_secret,
           function (err, data){
             if (err) {
+              if (err.message === 'Over capacity') {
+                return res.render('error');
+              }
               return res.send(err, 500);
             }
 
@@ -109,6 +112,9 @@ app.get('/', ensureAuthenticated,
                 passport._strategies.twitter._oauth.getProtectedResource('https://api.twitter.com/1.1/users/lookup.json?user_id=' + ids.join(','),'GET',req.user.twitter_token,req.user.twitter_token_secret,
                   function(err, data){
                     if (err) {
+                      if (err.message === 'Over capacity') {
+                        return res.render('error');
+                      }
                       return res.send(err, 500);
                     }
                     var json = JSON.parse(data);
