@@ -155,7 +155,7 @@ app.get('/', ensureAuthenticated,
               users = _.compact(users);
               status = _.compact(status);
               redis.hset(req.user.twitter_token, 'list', JSON.stringify({users: users, status: status}));
-              redis.expire(req.user.twitter_token, 60*60);
+              redis.expire(req.user.twitter_token, 60*5);
               res.render('index', {title: 'twitter friends cleaner', users: users, status: status });
             });
           }
@@ -192,7 +192,7 @@ app.get('/remove/:id', ensureAuthenticated, function(req, res){
         userStatus.users = _.compact(userStatus.users);
         userStatus.status = _.compact(userStatus.status);
         redis.hset(req.user.twitter_token, 'list', JSON.stringify(userStatus));
-        redis.expire(req.user.twitter_token, 60*60);
+        redis.expire(req.user.twitter_token, 60*5);
 
       });
     }
