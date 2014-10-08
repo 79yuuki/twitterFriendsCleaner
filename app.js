@@ -143,7 +143,7 @@ app.get('/', ensureAuthenticated,
               });
               for (var ite=0; ite<users.length; ite++) {
                 var user = users[ite];
-                users[ite] = {name: user.name, screen_name: user.screen_name, id: user.id};
+                users[ite] = {name: user.name, screen_name: user.screen_name, id: user.id, profile_image_url: user.profile_image_url};
               }
               var now = moment();
               for (var i = 0; i < users.length; i++) {

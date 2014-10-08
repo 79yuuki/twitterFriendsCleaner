@@ -23,6 +23,8 @@
       <% for(var i=0; i<users.length; i++) { %>
       <div class="twitter" data-conversation="none" lang="ja" id="tweet-<%= users[i].id %>">
         <p><%= status[i].text %></p>
+        <a href="https://twitter.com/<%= users[i].screen_name %>/">
+        <img src="<%= users[i].profile_image_url %>" alt="thumb"></a>
         &mdash; <%= users[i].name %> (@<%= users[i].screen_name %>)<br>
         <a class="time" href="https://twitter.com/<%= users[i].screen_name %>/status/<%= status[i].id_str %>">
           <%= status[i].created_at %>
