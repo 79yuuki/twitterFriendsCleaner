@@ -188,6 +188,9 @@ app.get('/remove/:id', ensureAuthenticated, function(req, res){
       redis.hget(req.user.twitter_token, 'list',function(err,result){
         if (err) { return res.send(err, 500); }
         var userStatus = JSON.parse(result);
+        if (!userStatus || !userStatus.users) {
+          return res.send(new Error('Fuckin user'), 500);
+        }
         for (var i=0; i<userStatus.users.length; i++) {
           if (userStatus.users[i].id === id) {
             delete userStatus.users[i];
