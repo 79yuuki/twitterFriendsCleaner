@@ -23,6 +23,12 @@ p#description {
   text-align: center;
 }
 
+#twitterB {
+  margin: 0 auto;
+  width: 80px;
+  height: 20px;
+}
+
 p#aboutme {
   color: #AAA;
   text-align: center;
