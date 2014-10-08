@@ -29,6 +29,24 @@ p#aboutme {
   font-size: 12px;
 }
 
+div#sort-button {
+  margin: 0 auto;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  color: #666;
+  padding: 10px 30px;
+  margin: 2px;
+  float: left;
+  background-color: #EEE;
+  border-color: #DDD;
+}
+
 div.twitter {
   color: #666;
   background-color: rgba(255,255,255,0.7);

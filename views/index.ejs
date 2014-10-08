@@ -9,24 +9,86 @@
     <h1>Twitter Friends Cleaner</h1>
     <p id="description">This service to help to remove a Twitter friend there is no post more than a month.</p>
     <p id="aboutme">Created by <a href="https://twitter.com/79yuuki">@79yuuki</a>.</p>
+    <div id="sort-button">
+      <ul>
+        <li>Older</li>
+        <li>Newer</li>
+      </ul>
+    </div>
+    <div id="tweets">
       <% for(var i=0; i<users.length; i++) { %>
       <div class="twitter" data-conversation="none" lang="ja" id="tweet-<%= users[i].id %>">
         <p><%= status[i].text %></p>
         &mdash; <%= users[i].name %> (@<%= users[i].screen_name %>)<br>
-        <a href="https://twitter.com/<%= users[i].screen_name %>/status/<%= status[i].id_str %>">
+        <a class="time" href="https://twitter.com/<%= users[i].screen_name %>/status/<%= status[i].id_str %>">
           <%= status[i].created_at %>
         </a>
         <hr>
         <button id="<%= users[i].id %>" >Remove</button>
       </div>
       <% } %>
+    </div>
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
       <script type="text/javascript">
+var htmlOriginal = $.fn.html;
+$.fn.html = function(html, callback){
+  var ret = htmlOriginal.apply(this, arguments);
+  if (typeof callback === 'function') {
+    callback();
+  }
+  return ret;
+};
 $(document).ready(function(){
+
+    function olderSort(reverse) {
+      var tweets = $('.twitter');
+      var lists = tweets.get();
+      var sort = [];
+      for (var i=0; i<lists.length; i++) {
+        var list = $(lists[i]);
+        var time = list.find('.time').html();
+        var tweetId = list.attr('id');
+        sort.push({ id: tweetId, time: time });
+      }
+
+      sort.sort(function (a, b){
+        var m1 = moment(a.time, "ddd MMM D HH:mm:ss ZZ YYYY");
+        var m2 = moment(b.time, "ddd MMM D HH:mm:ss ZZ YYYY");
+        if (m1.diff(m2) > 0) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+
+      if (reverse) {
+        sort.reverse();
+      }
+
+      for (var j=0; j<sort.length; j++) {
+        $("div#tweets").append($('#'+sort[j].id));
+      }
+    }
+
+    function newerSort(){
+      olderSort(true);
+    }
+
   $("button").click(function(){
     var id = $(this).attr("id");
     $("#tweet-"+id).hide("slow", function(){ $('#tweet-'+id).remove(); });
     $.get('/remove/'+id);
+  });
+
+  $("#sort-button li").click(function(){
+    var type = $(this).html();
+    if (type === 'Older') {
+      olderSort();
+    } else if (type === 'Newer') {
+      newerSort();
+    }
   });
 });
       </script>
